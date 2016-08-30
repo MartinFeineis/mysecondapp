@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.hardware.*;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     protected Location mLastLocation;
     protected String mLatitudeLabel;
-    protected String mLongitudeLabe;
+    protected String mLongitudeLabel;
+    protected TextView mLatitudeText;
+    protected TextView mLongitudeText;
 
     protected GoogleApiClient mGoogleApiClient;
     @Override
@@ -40,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             sb1.append(" ");
         }
         Log.d(TAG, String.valueOf(sb1));
-        TextView textView1 = (TextView) findViewById(R.id.latte);
-        textView1.append(sb1);
+        //TextView textView1 = (TextView) findViewById(R.id.latte);
+        //textView1.append(sb1);
 
         if (mGoogleApiClient == null){
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -53,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         }
 
         mLatitudeLabel = getResources().getString(R.string.latitude_label);
+        mLongitudeLabel = getResources().getString(R.string.longitude_label);
+        mLatitudeText = (TextView) findViewById(R.id.latte);
+        mLongitudeText = (TextView) findViewById(R.id.longe);
+
 
     }
     protected void onStart(){
@@ -66,6 +73,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null){
+            mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel, mLastLocation.getLatitude()));
+            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel, mLastLocation.getLongitude()));
+        }else {
+            mLatitudeText.setText("nothing");
+            mLongitudeText.setText("here");
+        }
 
     }
 
