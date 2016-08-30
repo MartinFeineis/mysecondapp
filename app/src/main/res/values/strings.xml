@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mysecondapp</string>
+    <string name="latitude_label">Latituhde</string>
+    <string name="longitude_label">Logituhde</string>
 </resources>

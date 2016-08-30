@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             sb1.append(" ");
         }
         Log.d(TAG, String.valueOf(sb1));
-        TextView textView1 = (TextView) findViewById(R.id.text_id);
+        TextView textView1 = (TextView) findViewById(R.id.latte);
         textView1.append(sb1);
 
         if (mGoogleApiClient == null){
@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                     .build();
 
         }
+
+        mLatitudeLabel = getResources().getString(R.string.latitude_label);
+
     }
     protected void onStart(){
         mGoogleApiClient.connect();
