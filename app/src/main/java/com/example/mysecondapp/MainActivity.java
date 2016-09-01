@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         //TextView textView1 = (TextView) findViewById(R.id.latte);
         //textView1.append(sb1);
 
-        if (mGoogleApiClient == null){
+        protected synchronized void buildGoogleApiClient() {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLatitudeText = (TextView) findViewById(R.id.latte);
         mLongitudeText = (TextView) findViewById(R.id.longe);
-
-
     }
     protected void onStart(){
         mGoogleApiClient.connect();
@@ -72,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
+    //public void onConnected(@Nullable Bundle bundle) {
+    public void onConnected(Bundle connectionHint) {
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null){
             mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel, mLastLocation.getLatitude()));
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+    public void onConnectionFailed(ConnectionResult result) {
+        Log.i(TAG, "Connection failed: ")
     }
 }
