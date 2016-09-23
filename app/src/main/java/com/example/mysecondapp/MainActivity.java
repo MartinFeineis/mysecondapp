@@ -1,14 +1,20 @@
 package com.example.mysecondapp;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.*;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity.*;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -17,6 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
+import java.util.jar.*;
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -27,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected String mLongitudeLabel;
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+
+    //int permissionCheck = ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_COARSE_LOCATION);
+    ActivityCompat.requestPermissions(thisActivity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
 
     protected GoogleApiClient mGoogleApiClient;
     @Override
@@ -43,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             sb1.append(" ");
         }
         Log.d(TAG, String.valueOf(sb1));
-        //TextView textView1 = (TextView) findViewById(R.id.latte);
-        //textView1.append(sb1);
+
+
 
         if (mGoogleApiClient == null){
             mGoogleApiClient = new GoogleApiClient.Builder(this)
