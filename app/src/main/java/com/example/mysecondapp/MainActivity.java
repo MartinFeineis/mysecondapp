@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.*;
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected TextView mLongitudeText;
 
     //int permissionCheck = ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_COARSE_LOCATION);
-    ActivityCompat.requestPermissions(thisActivity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+    //ActivityCompat.requestPermissions(thisActivity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
 
     protected GoogleApiClient mGoogleApiClient;
     @Override
@@ -53,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             sb1.append(" ");
         }
         Log.d(TAG, String.valueOf(sb1));
-
-
+        //TextView textView1 = (TextView) findViewById(R.id.latte);
+        //textView1.append(sb1);
 
         protected synchronized void buildGoogleApiClient() {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLatitudeText = (TextView) findViewById(R.id.latte);
         mLongitudeText = (TextView) findViewById(R.id.longe);
-    }
+    };
     protected void onStart(){
         mGoogleApiClient.connect();
         super.onStart();
