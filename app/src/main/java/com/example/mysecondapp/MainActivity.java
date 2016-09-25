@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.*;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import android.hardware.*;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity.*;
+import android.content.pm.PackageManager;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
 
-    //int permissionCheck = ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_COARSE_LOCATION);
-    ActivityCompat.requestPermissions(thisActivity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+    public String MY_PERMISSIONS_REQUEST_LOCATION;
+    int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+    //int permissionCheck = ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_COARSE_LOCATION));
+    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
 
     protected GoogleApiClient mGoogleApiClient;
     @Override
